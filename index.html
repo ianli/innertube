@@ -1,85 +1,432 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset='utf-8'>
+	<title>Innertube</title>
+	
+	<!-- Blueprint CSS -->
+	<link rel="stylesheet" href="/css/cw10gw20cc24/screen.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="/css/cw10gw20cc24/print.css" type="text/css" media="print" /> 
+	<!--[if lt IE 8]>
+		<link rel="stylesheet" href="/css/cw10gw20cc24/ie.css" type="text/css" media="screen, projection" />
+	<![endif]-->
+	
+	<!-- @font-face "GothamBookRegular" "GothamMediumRegular" -->
+	<link rel="stylesheet" href="/css/gotham/stylesheet.css" type="text/css" />
+	
+	<style type="text/css">
+		body {
+			font-family:"GothamBookRegular";
+			font-size:16px;
+			color:#555;
+			background:#8BC5EB url(/img/alpha/waves_30.png) repeat top center;
+		}
+		b, strong {
+			font-family:"GothamMediumRegular";
+			font-weight:normal;
+		}
+		label {
+			font-family:"GothamBookRegular";
+			font-weight:normal;
+		}
+		
+		/* Blueprint overrides and additions */
+		hr.dblspace {
+			clear:both;
+			float:none;
+			width:100%;
+			height:1px;margin:0 0 3em;
+			border:none;
+			background:#fff;
+			color:#fff;
+			visibility:hidden;
+		}
+		input.text,
+		textarea {
+			width:95%;
+		}
+		input.text { font-size:13px; }
+		
+		/* Custom */
+		
+		#sea {
+			height:50px;
+			overflow:hidden;
+		}
 
-  <title>ianli/innertube @ GitHub</title>
-
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #785006;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #ffffff;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 { font-size: 3.8em; color: #87aff9; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #87aff9; }
-    h3 { text-align: center; color: #87aff9; }
-    a { color: #87aff9; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
+		#wrap {
+			width:100%;
+			background-color:#fff;
+		}
+		
+		#hd {
+			margin:-30px 0 3em;
+		}
+			#logo {
+				display:block;
+				margin:0 auto 10px;
+				width:198px;
+			}
+			#hd h2 {
+				font-family:"GothamBookRegular";
+				font-size:16px;
+				text-align:center;
+				color:#555;
+			}
+		
+		#bd {
+			margin-bottom:40px;
+		}
+			#bd h2 {
+				font-size:24px;
+				font-family:"GothamMediumRegular";
+				text-transform:uppercase;
+				text-align:center;
+				color:#44A9EB;
+			}
+			#bd img.subtitle {
+				display:block;
+				margin-bottom:0.75em;
+			}
+		
+		#notify_me ._popup {
+			display:none;
+			margin:0 auto;
+			padding:20px;
+			background-color:#fff;
+			border-style:solid;
+			border-color:#D4E4EE;
+			border-width:5px;
+			box-shadow:0px 3px 10px rgba(0,0,0,0.33);
+			border-radius:10px;
+		}
+			#notify_me ._thanks {
+				display:none; /* Initial state is hidden */
+				font-size:42px;
+				text-align:center;
+				color:#555;
+			}
+			
+		.big_button {
+			display:block;
+			padding:10px;
+			text-align:center;
+			font-size:24px;
+			background-color:#44A9EB;
+			border:5px solid #D4E4EE;
+			border-radius:10px;
+			color:#fff !important;
+			text-decoration:none;
+			cursor:pointer;
+		}
+			.big_button:hover {
+				border-color:#8BC5EB;
+			}
+	</style>
 </head>
+<body id="alpha_app">
 
-<body>
-  <a href="http://github.com/ianli/innertube"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+<div id="sea">
+		
+</div>
 
-  <div id="container">
+<div id="wrap">
+	<div class="container">
+		<div id="hd" class="span-24">
+			<img id="logo" src="/img/alpha/innertube_logo.png" alt="Innertube" />
+			<h2>Your Personal Informatics Dashboard</h2>
+		</div>
+		
+		<!-- Body -->
+		<div id="bd" class="span-24">
+			<div id="notify_me">
+				<div class="prepend-5 span-14 append-5 last">
+					<a class="_link big_button" href="javascript:void(0);">Coming soon! Be notified!</a>
+				</div>
+				<div class="span-24 last">
+					<div class="_popup">
+						<form>
+							<div class="span-11">
+								<p>
+									We haven't launched yet, but we'd be happy to keep you posted about our private alpha.
+									Your email won't be used for anything else.
+								</p>
+								<p>
+									<input name="alpha_email" class="text" type="text" placeholder="Email" />
+								</p>
+							</div>
+							<div class="span-11 last">
+								<input type="checkbox" name="kind" value="use" /> I <b>use</b> self-tracking tools.<br/>
+								<input type="checkbox" name="kind" value="build" /> I <b>build</b> self-tracking tools.<br/>
+								<textarea name="alpha_description" style="height:90px" placeholder="Why do you use and/or build self-tracking tools?"></textarea>
+							</div>
+							<div class="prepend-6 span-12 append-6 last">
+								<input type="hidden" name="alpha_kind" />
+								<a class="_submit big_button" href="javascript:void(0);">Notify Me!</a>
+							</div>
+						</form>
+						<div class="_thanks">
+							Thanks!
+						</div>
+						<!-- Needed so that div._popup surrounds its children. -->
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+			<hr class="dblspace" />
+			
+			<!--
+				<div class="prepend-4 span-16">
+					Self-tracking tools are like little <i>buckets</i> that capture your personal data <i>raindrops</i>.
+					People use many tools to capture different kinds of personal data,
+					but 
+					
+					Innertube is the dashboard for all your self-tracking data.
+					Innertube puts together visualizations that are scattered in multiple locations into one place.
+				</div>
+				<hr class="dblspace" />
+			-->
+			
+			<h2>What is Innertube?</h2>
+			
+			<div class="prepend-1 span-9">
+				<img src="/img/alpha/screenshot_dashboard.png" width="250" />
+			</div>
+			<div class="span-13 last">
+				<img class="subtitle" src="/img/alpha/subtitle_dashboard.png" height="20" />
+				<p>
+					Most people's data are stored in several places because they use separate self-tracking tools. 
+					Innertube Dashboard puts visualizations of these separate data into one interface. 
+					With the data together, users can more easily find relationships between their data.
+				</p>
+			</div>
+			<hr class="space" />
+			
+			<div class="prepend-1 span-9">
+				<img src="/img/alpha/screenshot_api.png" width="250" />
+			</div>
+			<div class="span-13 last">
+				<img class="subtitle" src="/img/alpha/subtitle_api.png" height="20" />
+				<p>
+					Innertube provides an API for developers of self-tracking tools 
+					to create widgets that users can add to their dashboards.
+				</p>
+			</div>
+			<hr class="space" />
+			
+			<div class="prepend-1 span-9">
+				<img src="/img/alpha/screenshot_catalog.png" width="250" />
+			</div>
+			<div class="span-13 last">
+				<img class="subtitle" src="/img/alpha/subtitle_catalog.png" height="20" />
+				<p>
+					Users browse the catalog to find widgets to add to their dashboard. 
+					The catalog will have widget reviews and recommendations.
+					Developers can add widgets that they created to the catalog.
+				</p>
+			</div>
+			<hr class="dblspace" />
+			
+			<h2>Contact</h2>
+			
+			<div class="prepend-6 span-12 append-6 last">
+				<a id="contact" class="big_button" style="font-size:32px"></a>
+			</div>
+			<hr class="space" />
+			<div style="text-align:center">
+				I will be in the Bay Area from May 27 to June 1.<br/>
+				I will attend the Quantified Self Conference on May 28 and 29.<br/>
+				Contact me for a demo.
+			</div>
+			<hr class="dblspace" />
+			
+			<h2>Sponsored By</h2>
+			
+			<div class="span-9" style="padding-top:12px;text-align:right;">
+				<a href="http://www.cmu.edu/"><img src="/img/alpha/sponsor_cmu.png" /></a>
+			</div>
+			<div class="span-2" style="text-align:center;">
+				<a href="http://www.hcii.cmu.edu/"><img src="/img/alpha/sponsor_hcii.png" /></a>
+			</div>
+			<div class="span-2" style="text-align:center;">
+				<a href="http://www.nsf.gov/"><img src="/img/alpha/sponsor_nsf.png" /></a>
+			</div>
+			<div class="span-11 last" style="padding-top:5px;text-align:left;">
+				<a href="http://www.cmu.edu/qolt/"><img src="/img/alpha/sponsor_qolt.png" /></a>
+			</div>
+		</div>
+	</div>
+</div>
 
-    <div class="download">
-      <a href="http://github.com/ianli/innertube/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/ianli/innertube/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    </div>
+<!-- Javascripts -->
+<script type="text/javascript" src="/js/libs/jquery-1.5.min.js"></script>
+<script type="text/javascript" src="/js/libs/underscore.min.js"></script>
+<script type="text/javascript" src="/js/libs/backbone.min.js"></script>
+<script type="text/javascript" src="/js/libs/json2.js"></script>
+<script type="text/javascript" src="/js/libs/jquery.placeholder.js"></script>
 
-    <h1><a href="http://github.com/ianli/innertube">innertube</a>
-      <span class="small">by <a href="http://github.com/ianli">ianli</a></span></h1>
-
-    <div class="description">
-      Your Personal Informatics Dashboard
-    </div>
-
-    <h2>Authors</h2>
-<p>Ian Li (ianarli@gmail.com)<br/><br/>      </p>
-<h2>Contact</h2>
-<p>Ian Li (ianarli@gmail.com)<br/>      </p>
-
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/ianli/innertube/zipball/master">zip</a> or
-      <a href="http://github.com/ianli/innertube/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/ianli/innertube</pre>
-    </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/ianli/innertube">ianli/innertube</a>
-    </div>
-
-  </div>
-
-  <script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
 <script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-0000000-1");
-pageTracker._trackPageview();
-} catch(err) {}</script>
+$(function() {
+	// Generate the email address.
+	var email = "ian" + "li@" + "cmu" + ".ed" + "u";
+	$("#contact")
+		.attr("href", "mailto:" + email)
+		.html(email);
+		
+	// Placeholder
+	$("input[placeholder], textarea[placeholder]").placeholder();
+	
+	var NotifyMeModel = Backbone.Model.extend({
+		initialize: function() {
+			// Attributes
+			// - email
+			// - kind
+			// - description
+		},
+		
+		url: function() {
+			var base = "/alphas";
+			if (this.isNew()) return base;
+			return base + '/' + this.id;
+		}
+	});
+		
+	var NotifyMeView = Backbone.View.extend({
+		el: $("#notify_me"),
+		
+		initialize: function() {
+			_.bindAll(this, "render", "show", "hide", "sayThanks");
+			this.render();
+		},
+		
+		render: function() {
+			var self = this;
+			self.$("._submit").click(function(event) {
+					var $checked = self.$("input[type='checkbox']:checked");
+					var $kind = self.$("input[name='alpha_kind']");
+					if ($checked.size() == 1) {
+						$kind.val($checked.val());
+					} else if ($checked.size() == 2) {
+						$kind.val("both");
+					} else {
+						$kind.val("");
+					}
+					
+					var notifyMeModel = new NotifyMeModel({
+						"email": self.$("input[name='alpha_email']").val(),
+						"kind": $kind.val(),
+						"description": self.$("textarea[name='alpha_description']").val()
+					});
+					
+					notifyMeModel.save({}, {
+						success: function(model, response) {
+							self.sayThanks();
+						},
+						error: function(model, response) {
+							if (_.isString(response)) {
+								alert(response);
+							} else if (!_.isUndefined(response.responseText)) {
+								var msg = "Errors:\n";
+								var errors = JSON.parse(response.responseText);
+								for (var i in errors) {
+									msg += "* " + i + " " + errors[i] + "\n";
+								}
+								alert(msg);
+							}
+						}
+					});
+				});
+		},
+		
+		events: {
+			"click ._link": "show"
+		},
+		
+		show: function(event) {
+			var self = this;
+			
+			// Form should be visible.
+			self.$("form").show();
+			
+			// Thanks should be hidden, when form is visible.
+			self.$("._thanks").hide();
+			
+			// Slide down the popup.
+			self.$("._popup")
+				.slideDown('fast')
+				.click(function(e) {
+					e.stopPropagation();
+				});
+			
+			// Hide the link.
+			self.$("._link").slideUp();
+			
+			// If the body is clicked, then hide the view.
+			// This event only happens once.
+			$("body").one("click.actLikeMenu", function() {
+				self.hide();
+			});
+			
+			if (event) event.stopPropagation();
+		},
+		
+		sayThanks: function() {
+			var self = this;
+			
+			self.$("._thanks").slideDown('fast');
+			self.$("form").slideUp('fast');
+			
+			setTimeout(function() {
+				self.hide();
+			}, 2000);
+		},
+		
+		hide: function(event) {
+			var self = this;
+			
+			// Show the link.
+			self.$("._link").slideDown('fast');
+			self.$("._popup").slideUp('fast');
+			
+			$("body").unbind("click.actLikeMenu");
+			
+			
+			if (event) event.stopPropagation();
+		}
+	});
+	
+	var notifyMeView = new NotifyMeView();
+	
+	// This the view for the whole page.
+	var AlphaAppView = Backbone.View.extend({
+		el: $("#alpha_app"),
+		
+		initialize: function() {
+			_.bindAll(this, "render", "reveal")
+		},
+		
+		render: function() {
+			
+		},
+		
+		events: {
+			// "click #logo": "reveal"
+		},
+		
+		revealed: false,
+		
+		reveal: function() {
+			$('#sea').animate({
+				height: this.revealed ? "50px" : "500px"
+			});
+			
+			this.revealed = !this.revealed;
+		}
+	});
+
+	// Start the app.
+	var view = new AlphaAppView();
+});
+</script>
+
 </body>
 </html>
