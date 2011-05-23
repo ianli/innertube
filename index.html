@@ -13,115 +13,7 @@
 	<!-- @font-face "GothamBookRegular" "GothamMediumRegular" -->
 	<link rel="stylesheet" href="/css/gotham/stylesheet.css" type="text/css" />
 	
-	<style type="text/css">
-		body {
-			font-family:"GothamBookRegular";
-			font-size:16px;
-			color:#555;
-			background:#8BC5EB url(/img/alpha/waves_30.png) repeat top center;
-		}
-		b, strong {
-			font-family:"GothamMediumRegular";
-			font-weight:normal;
-		}
-		label {
-			font-family:"GothamBookRegular";
-			font-weight:normal;
-		}
-		
-		/* Blueprint overrides and additions */
-		hr.dblspace {
-			clear:both;
-			float:none;
-			width:100%;
-			height:1px;margin:0 0 3em;
-			border:none;
-			background:#fff;
-			color:#fff;
-			visibility:hidden;
-		}
-		input.text,
-		textarea {
-			width:95%;
-		}
-		input.text { font-size:13px; }
-		
-		/* Custom */
-		
-		#sea {
-			height:50px;
-			overflow:hidden;
-		}
-
-		#wrap {
-			width:100%;
-			background-color:#fff;
-		}
-		
-		#hd {
-			margin:-30px 0 3em;
-		}
-			#logo {
-				display:block;
-				margin:0 auto 10px;
-				width:198px;
-			}
-			#hd h2 {
-				font-family:"GothamBookRegular";
-				font-size:16px;
-				text-align:center;
-				color:#555;
-			}
-		
-		#bd {
-			margin-bottom:40px;
-		}
-			#bd h2 {
-				font-size:24px;
-				font-family:"GothamMediumRegular";
-				text-transform:uppercase;
-				text-align:center;
-				color:#44A9EB;
-			}
-			#bd img.subtitle {
-				display:block;
-				margin-bottom:0.75em;
-			}
-		
-		#notify_me ._popup {
-			display:none;
-			margin:0 auto;
-			padding:20px;
-			background-color:#fff;
-			border-style:solid;
-			border-color:#D4E4EE;
-			border-width:5px;
-			box-shadow:0px 3px 10px rgba(0,0,0,0.33);
-			border-radius:10px;
-		}
-			#notify_me ._thanks {
-				display:none; /* Initial state is hidden */
-				font-size:42px;
-				text-align:center;
-				color:#555;
-			}
-			
-		.big_button {
-			display:block;
-			padding:10px;
-			text-align:center;
-			font-size:24px;
-			background-color:#44A9EB;
-			border:5px solid #D4E4EE;
-			border-radius:10px;
-			color:#fff !important;
-			text-decoration:none;
-			cursor:pointer;
-		}
-			.big_button:hover {
-				border-color:#8BC5EB;
-			}
-	</style>
+	<link rel="stylesheet" href="/css/innertube/alpha.css" type="text/css" />
 </head>
 <body id="alpha_app">
 
@@ -143,32 +35,8 @@
 					<a class="_link big_button" href="javascript:void(0);">Coming soon! Be notified!</a>
 				</div>
 				<div class="span-24 last">
-					<div class="_popup">
-						<form>
-							<div class="span-11">
-								<p>
-									We haven't launched yet, but we'd be happy to keep you posted about our private alpha.
-									Your email won't be used for anything else.
-								</p>
-								<p>
-									<input name="alpha_email" class="text" type="text" placeholder="Email" />
-								</p>
-							</div>
-							<div class="span-11 last">
-								<input type="checkbox" name="kind" value="use" /> I <b>use</b> self-tracking tools.<br/>
-								<input type="checkbox" name="kind" value="build" /> I <b>build</b> self-tracking tools.<br/>
-								<textarea name="alpha_description" style="height:90px" placeholder="Why do you use and/or build self-tracking tools?"></textarea>
-							</div>
-							<div class="prepend-6 span-12 append-6 last">
-								<input type="hidden" name="alpha_kind" />
-								<a class="_submit big_button" href="javascript:void(0);">Notify Me!</a>
-							</div>
-						</form>
-						<div class="_thanks">
-							Thanks!
-						</div>
-						<!-- Needed so that div._popup surrounds its children. -->
-						<div class="clear"></div>
+					<div class="_popup clearfix">
+						<iframe src="https://spreadsheets.google.com/embeddedform?formkey=dDdWTjJJV0t1NUJDc3k4ZUdKa1RCT0E6MQ" width="100%" height="550" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
 					</div>
 				</div>
 			</div>
