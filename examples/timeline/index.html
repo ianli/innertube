@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Steps (Demo)</title>
+	
+	<!-- Blueprint -->
+	<link rel="stylesheet" href="/stylesheets/blueprint/reset.css" type="text/css" />
+	<link rel="stylesheet" href="/stylesheets/blueprint/typography.css" type="text/css" />
+
+	<style type="text/css">
+	body {
+		padding:10px;
+	}
+	#actions {
+		margin-bottom:10px;
+		line-height:1em;
+	}
+	.timeline-view {}
+		.timeline-view>._yaxis {
+			float:left;
+			padding-right:3px;
+			width:36px;
+			height:120px;
+			border-right:1px solid #ccc;
+			text-align:right;
+			color:#333;
+			font-size:11px;
+		}
+		.timeline-view>._area {
+			float:left;
+			width:760px;
+		}
+			.timeline-view>._area>._column {
+				position:relative;
+				float:left;
+				height:140px;
+				text-align:center;
+				cursor:pointer;
+			}
+			.timeline-view>._area>._column:hover,
+			.timeline-view>._area>._column.selected {
+				background-color:#eee;
+			}
+			.timeline-view>._area>._column>._bar {
+				position:absolute;
+				bottom:20px;
+				margin:0 10%;
+				width:80%;
+				background-color:#44a9eb;
+			}
+				.timeline-view>._area>._column.selected>._bar {
+					background-color:#f90;
+				}
+			.timeline-view>._area>._column>._x {
+				position:absolute;
+				bottom:0;
+				height:20px;
+				width:100%;
+				border-top:1px solid #ccc;
+				font-size:11px;
+				color:#333;
+				text-align:center;
+			}
+	</style>
+</head>
+<body>
+	<div id="actions">
+		<a href="/demos/timeline/docs/timeline-demo.html" target="_new">Code</a>
+	</div>
+	<div id="simple-view"></div>
+
+	<!-- Javascripts -->
+	<script type="text/javascript" src="/javascripts/libs/jquery-1.5.1.min.js"></script>
+	<script type="text/javascript" src="/javascripts/libs/underscore.js"></script>
+	<script type="text/javascript" src="/javascripts/libs/backbone.js"></script>	
+	<script type="text/javascript" src="/javascripts/libs/easyxdm/easyXDM.debug.js"></script>
+	<script type="text/javascript">
+		easyXDM.DomHelper.requiresJSON("/javascripts/libs/easyxdm/json2.js");
+	</script>
+	<script type="text/javascript" src="/javascripts/libs/date.js"></script>
+	<script type="text/javascript" src="http://ianli.github.com/innertube/0.1.0/innertube.js"></script>
+	<script type="text/javascript" src="timeline.js"></script>
+</body>
+</html>
