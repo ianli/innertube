@@ -1,17 +1,17 @@
-//     Innertube.js Timeline Example
-//     Copyright 2011 Ian Li, http://ianli.com
-//     This demo may be freely distributed under the MIT license.
+//     Innertube Widgets API Timeline Example
+//     Copyright 2011, Ian Li (http://ianli.com)
+//     This example may be freely distributed under the MIT license.
 
-// A simple demonstration of an Innertube widget.
+// A simple example using the Innertube Widgets API.
 //
 // Dependencies:
 //
-// * [Innertube.js](http://ianli.github.com/innertube/)
-// * [easyXDM](http://easyXDM.net)
-// * [jQuery](http://jquery.com)
-// * [Underscore.js](http://documentcloud.github.com/underscore/)
-// * [Backbone.js](http://documentcloud.github.com/backbone/)
-// * [Date.js](http://www.datejs.com)
+// * [Innertube Widgets API](http://ianli.github.com/innertube/)
+// * [easyXDM](http://easyXDM.net) for cross-domain messaging
+// * [jQuery](http://jquery.com) for DOM manipulation
+// * [Underscore.js](http://documentcloud.github.com/underscore/) for utility functions
+// * [Backbone.js](http://documentcloud.github.com/backbone/) for MVC pattern
+// * [Date.js](http://www.datejs.com) for date parsing and formatting
 
 // * The semicolon prevents potential errors when minifying code together.
 // * The function sandboxes the code.

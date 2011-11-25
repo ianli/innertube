@@ -1,9 +1,9 @@
 /*!
- * Innertube.js 0.1.0
+ * Innertube Widgets API 0.1.0
  * http://innertube.me
  * 
  * Copyright 2011, Ian Li (http://ianli.com)
- * Innertube.js is freely distributable under the MIT license.
+ * Innertube Widgets API is freely distributable under the MIT license.
  *
  * Requires the following Javascript libraries:
  * - [easyXDM](http://easyxdm.net/) for cross-domain messaging
