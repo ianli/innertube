@@ -5,6 +5,7 @@
 // A simple demonstration of an Innertube widget.
 //
 // Dependencies:
+//
 // * [Innertube.js](http://ianli.github.com/innertube/)
 // * [easyXDM](http://easyXDM.net)
 // * [jQuery](http://jquery.com)
