@@ -13,11 +13,12 @@
 	}
 	#actions {
 		float:right;
-		margin-bottom:10px;
+		margin-bottom:5px;
 		line-height:1em;
 	}
 	.timeline-view {}
 		.timeline-view>._yaxis {
+			clear:both;
 			float:left;
 			padding-right:3px;
 			width:36px;
@@ -38,9 +39,11 @@
 				text-align:center;
 				cursor:pointer;
 			}
-			.timeline-view>._area>._column:hover,
-			.timeline-view>._area>._column.selected {
+			.timeline-view>._area>._column:hover {
 				background-color:#eee;
+			}
+			.timeline-view>._area>._column.selected {
+				background-color:#ddd;
 			}
 			.timeline-view>._area>._column>._bar {
 				position:absolute;
