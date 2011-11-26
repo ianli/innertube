@@ -1,8 +1,8 @@
 /*!
  * Innertube Widgets API 0.1.0
- * http://innertube.me
+ * http://ianli.github.com/innertube/
  * 
- * Copyright 2011, Ian Li (http://ianli.com)
+ * Copyright 2011 Ian Li (http://ianli.com)
  * Innertube Widgets API is freely distributable under the MIT license.
  *
  * Requires the following Javascript libraries:
