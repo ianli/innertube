@@ -32,7 +32,8 @@
 		// Default attributes for the timeline.
 		defaults: {
 			date: null,
-			data: []
+			data: [],
+			highlight: null
 		}
 		
 	});
@@ -54,7 +55,7 @@
 		  <table> \
 		    <tr> \
     		  <td class="_yaxis"> \
-    		    <div class="_value">100%</div> \
+    		    <div class="_labels">100%</div> \
     		  </td> \
   				<% for (var i = 0; i < columns_count; i++)  { %> \
   					<td class="_column"> \
@@ -78,7 +79,11 @@
 			
 			// When the `data` attribute of the model changes,
 			// render the view again.
-			self.model.bind('change', self.render)
+			self.model.bind('change:data', self.render);
+			
+			self.model.bind('change:highlight', function (model, highlightObject) {
+			  self.highlight(highlightObject);
+			});
 		},
 		
 		// Render the view.
@@ -87,6 +92,7 @@
 				$el = $(self.el),
 				data = self.model.get('data'),
 				range = self.model.get('range'),
+				highlightObject = self.model.get('highlight'),
 				columns_count = data.length,
 				columns_width = (columns_count > 0) ? (100 / data.length) : 100;
 			
@@ -104,23 +110,11 @@
 					var $self = $(this);
 					$self.addClass('selected');
 					
-					var range = $self.data('range');
-					if (range == 'day') {
-						var key = 'hour';
-					} else if (range == 'week') {
-						var key = 'dayofweek';
-					} else if (range == 'month') {
-						var key = 'day';
-					} else if (range == 'year') {
-						var key = 'month';
-					} else {
-						var key = 'column';
-					}
-					
-					var value = $self.data('value');
-					var highlight = {};
-					highlight[key] = value;
-					rpc.dashboard('highlight', highlight);
+					self.model.set({
+					  highlight: {
+					    hour: $self.data('value')
+					  }
+					});
 				});
 			
 			var barHeight= self.$('._value').height();
@@ -134,30 +128,24 @@
 				$(this).html(data[i].x);
 			});
 			
+			self.highlight(highlightObject);
+			
 			return self;
 		},
 		
 		highlight: function (object) {
+		  if (_.isUndefined(object) || _.isNull(object)) {
+		    return;
+		  }
+		  
 			var self = this,
-				range = self.model.get('range');
+				  range = self.model.get('range');
 				
-			if (range == 'day') {
-				var key = 'hour';
-			} else if (range == 'week') {
-				var key = 'dayofweek';
-			} else if (range == 'month') {
-				var key = 'day';
-			} else if (range == 'year') {
-				var key = 'month';
-			} else {
-				var key = 'column';
-			}
-			
-			if (typeof object[key] !== 'undefined' && object[key] != null) {			
-				self.$('._column')
+			if (!_.isUndefined(object.hour) && !_.isNull(object.hour)) {
+			  self.$('._column')
 					.removeClass('selected')
 					.each(function (i) {
-						if (object[key] == i) {
+						if (object.hour == i) {
 							$(this).addClass('selected');
 						}
 					});
@@ -307,6 +295,10 @@
 	// ------------
 	
 	var model = new TimelineModel();
+	model.bind("change:highlight", function (model, highlight) {
+	  rpc.dashboard('highlight', highlight);
+	});
+	
 	var view = new TimelineView({ model: model }).render();
 	$('#simple-view').append(view.el);
 	
@@ -327,6 +319,16 @@
 						rpc.dashboard("height", $('html').height());
 					}
 				});
+				
+				// Get the highlighted data from the dashboard.
+				rpc.dashboard("highlight", {
+					// Process the value returned.
+					success: function(highlightObject) {
+						model.set({
+						  highlight: highlightObject
+						});
+					}
+				});
 			}
 		},
 		// Remote methods callable by the dashboard.
@@ -343,7 +345,9 @@
 			},
 			
 			highlight: function (value) {
-				view.highlight(value);
+        model.set({
+				  highlight: value
+				});
 			}
 		}
 	);
