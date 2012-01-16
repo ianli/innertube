@@ -31,8 +31,9 @@
 		
 		// Default attributes for the timeline.
 		defaults: {
+			date: null,
 			data: []
-		},
+		}
 		
 	});
 	
@@ -49,17 +50,23 @@
 		className: 'timeline-view',
 		
 		// Template
-		template: _.template(
-			'<div class="_yaxis">100%</div> \
-			<div class="_area"> \
-				<% for (var i = 0; i < columns_count; i++)  { %> \
-					<div class="_column"> \
-						<div class="_bar"></div> \
-						<div class="_x"></div> \
-					</div> \
-				<% } %> \
-			</div>'
-		),
+		template: _.template('\
+		  <table> \
+		    <tr> \
+    		  <td class="_yaxis"> \
+    		    <div class="_value">100%</div> \
+    		  </td> \
+  				<% for (var i = 0; i < columns_count; i++)  { %> \
+  					<td class="_column"> \
+  					  <div class="_value"> \
+    						<div class="_bar"></div> \
+  						</div> \
+  						<div class="_x"></div> \
+  					</td> \
+  				<% } %> \
+    		</tr> \
+    	</table> \
+		'),
 		
 		// Prepare the view.
 		initialize: function () {
@@ -92,7 +99,6 @@
 						range: range
 					});
 				})
-				.width(columns_width + '%')
 				.click(function () {
 					$columns.removeClass('selected');
 					var $self = $(this);
@@ -117,8 +123,10 @@
 					rpc.dashboard('highlight', highlight);
 				});
 			
+			var barHeight= self.$('._value').height();
+			
 			self.$('._bar').each(function (i, el) {
-				var height = data[i].value * 120;
+				var height = data[i].value * barHeight;
 				$(this).height(height + 'px');
 			});
 			
@@ -308,8 +316,6 @@
 			// When the RPC is ready, set the height of the widget
 			// and get the current date to visualize.
 			ready: function() {
-				rpc.dashboard("height", 180);
-				
 				rpc.dashboard("date", {
 					success: function (value) {
 						var data = FakeData.get(value.range, value.year, value.month, value.day);
@@ -317,6 +323,8 @@
 							data: data,
 							range: value.range
 						});
+						
+						rpc.dashboard("height", $('html').height());
 					}
 				});
 			}
@@ -330,6 +338,8 @@
 					data: data,
 					range: range
 				});
+				
+				rpc.dashboard("height", $('html').height());
 			},
 			
 			highlight: function (value) {
