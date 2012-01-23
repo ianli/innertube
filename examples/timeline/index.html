@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Timeline Example - Innertube Widgets API</title>
+	
+	<!-- Blueprint -->
+	<link rel="stylesheet" href="/innertube/assets/stylesheets/blueprint/reset.css" type="text/css" />
+	<link rel="stylesheet" href="/innertube/assets/stylesheets/blueprint/typography.css" type="text/css" />
+
+	<style type="text/css">
+	body {
+		padding:5px;
+	}
+	  body:after {
+	    content:"\0020";
+	    display:block;
+	    height:0;
+	    clear:both;
+	    visibility:hidden;
+	    overflow:hidden;
+	  }
+	  
+	/* Blueprint overrides */
+	table, th, td { vertical-align:top; }
+	  
+	#actions {
+		float:right;
+		margin-bottom:10px;
+		line-height:1em;
+	}
+	.timeline-view {
+	  clear:both;
+	  overflow:hidden;
+	  -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+	}
+	  .timeline-view table {
+	    margin:0;
+	  }
+		.timeline-view table td._yaxis {
+		  overflow:hidden;
+		  padding:0;
+		  width:4%;
+		  text-align:right;
+		  font-size:11px;
+		  color:#666;
+		}
+		  .timeline-view table td._yaxis > ._labels {
+        height:131px;
+		    border-right:1px solid #999;
+		  }
+		.timeline-view td._column {
+		  overflow:hidden;
+			padding:10px 0 0 0;
+			width:4%;
+			text-align:center;
+			cursor:pointer;
+		}
+			.timeline-view td._column.selected {
+				background-color:#eee;
+			}
+			.timeline-view td._column:hover {
+				background-color:#e3e3e3;
+			}
+		.timeline-view td._column > ._value {
+		  position:relative;
+		  height:120px;
+		  border-bottom:1px solid #999;
+		  text-align:center;
+		}
+			.timeline-view td._column > ._value > ._bar {
+				position:absolute;
+				left:50%;
+			  bottom:0;
+			  margin-left:-45%;
+				width:90%;
+				background-color:#44A9EB;
+			}
+		.timeline-view td._column > ._x {
+			padding:5px 0;
+			height:12px;
+			line-height:12px;
+			font-size:12px;
+			color:#666;
+		}
+	</style>
+</head>
+<body>
+	<div id="actions">
+		<a href="/innertube/" target="_new">Innertube Widgets API</a> &nbsp;&nbsp;&nbsp;
+		<a href="http://innertube.me" target="_new">Innertube Home</a>
+	</div>
+	<div id="simple-view"></div>
+
+	<!-- Javascripts -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.js"></script>
+	<script type="text/javascript" src="/innertube/javascripts/underscore-1.2.2.min.js"></script>
+	<script type="text/javascript" src="/innertube/javascripts/easyXDM-2.4.15.118/easyXDM.min.js"></script>
+	<script type="text/javascript">
+		easyXDM.DomHelper.requiresJSON("/innertube/javascripts/easyXDM-2.4.15.118/json2.js");
+	</script>
+	<script type="text/javascript" src="/innertube/javascripts/date-1.0.js"></script>
+	<script type="text/javascript" src="/innertube/0.1.0/innertube.js"></script>
+	<script type="text/javascript" src="/innertube/javascripts/backbone-0.5.3.min.js"></script>	
+	<script type="text/javascript" src="timeline.js"></script>
+</body>
+</html>
