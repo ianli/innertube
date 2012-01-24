@@ -345,7 +345,12 @@
 			},
 			
 			highlight: function (value) {
-        model.set({
+				// If there is no hour value, then calculate it.
+				if (value.minutes && !value.hour) {
+					value.hour = Math.floor(value.minutes / 60);
+				}
+				
+				model.set({
 				  highlight: value
 				});
 			}
