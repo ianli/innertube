@@ -17,7 +17,7 @@
 // * The function sandboxes the code.
 // * Pass local reference to window and jQuery for performance reasons.
 // * Redefines undefined as it could have been tampered with.
-;(function (window, $, undefined) {
+;(function (window, $, _, undefined) {
 	
 	// TimelineModel
 	// -------------
@@ -293,67 +293,33 @@
 	
 	// Widget Setup
 	// ------------
-	
-	var model = new TimelineModel();
-	model.bind("change:highlight", function (model, highlight) {
-	  rpc.dashboard('highlight', highlight);
+  
+  var model = new TimelineModel();
+  model.bind("change:highlight", function (model, highlight) {
+    Innertube().send('highlight', highlight);
 	});
 	
 	var view = new TimelineView({ model: model }).render();
 	$('#simple-view').append(view.el);
-	
-	var rpc = new Innertube.RPC(
-		// Local methods
-		{
-			// When the RPC is ready, set the height of the widget
-			// and get the current date to visualize.
-			ready: function() {
-				rpc.dashboard("date", {
-					success: function (value) {
-						var data = FakeData.get(value.range, value.year, value.month, value.day);
-						model.set({ 
-							data: data,
-							range: value.range
-						});
-						
-						rpc.dashboard("height", $('html').height());
-					}
-				});
-				
-				// Get the highlighted data from the dashboard.
-				rpc.dashboard("highlight", {
-					// Process the value returned.
-					success: function(highlightObject) {
-						model.set({
-						  highlight: highlightObject
-						});
-					}
-				});
-			}
-		},
-		// Remote methods callable by the dashboard.
-		{
-			// Handles when the dashboard calls `date`.
-			date: function (range, year, month, day) {
-				var data = FakeData.get(range, year, month, day);
-				model.set({ 
-					data: data,
-					range: range
-				});
-				
-				rpc.dashboard("height", $('html').height());
-			},
-			
-			highlight: function (value) {
-				// If there is no hour value, then calculate it.
-				if (value.minutes && !value.hour) {
-					value.hour = Math.floor(value.minutes / 60);
-				}
-				
-				model.set({
-				  highlight: value
-				});
-			}
-		}
-	);
-})(window, jQuery);
+  
+  Innertube()
+    .ready(function () {
+      Innertube()
+        .send("height", $('body').height())
+        .request("date")
+        .request("highlight");
+    })
+    .receive('date', function (value) {
+      var data = FakeData.get(value.range, value.year, value.month, value.day);
+      model.set({ 
+        data: data,
+        range: value.range
+      });
+    })
+    .receive('highlight', function (highlightObject) {
+      model.set({
+        highlight: highlightObject
+      });
+    });
+  
+}(window, jQuery, _));
