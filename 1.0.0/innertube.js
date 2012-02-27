@@ -12,7 +12,7 @@
 
 // The semicolon prevents potential errors when minifying plugins together.
 // The function sandboxes the code.
-// Pass local reference to window for performance reasons.
+// Pass local reference for performance reasons.
 // Redefines undefined as it could have been tampered with.
 ;(function (window, _, easyXDM, undefined) {
   
@@ -32,6 +32,11 @@
     
       // A hash of functions when a message is received.
       , receiveCallbacks = {};
+    
+    
+    // ===============
+    // PREPARE OPTIONS
+    // ===============
       
     if (typeof options === 'undefined' || options === null) {
       // There were no options passed or it was null, so assign it a value.
@@ -42,10 +47,12 @@
       options = _.clone(options);
     }
     
+    // Set the defaults for options.
     _.defaults(options, {
       remote: null,
       container: null
     });
+    
     
     // ===========
   	// EASYXDM RPC
@@ -142,9 +149,17 @@
   	// PUBLIC METHODS
   	// ==============
   	
+  	// Bind an event handler to the event when the easyXDM.Rpc is ready.
+  	// If .ready() is called after easyXDM.Rpc is ready,
+  	// the new handler passed in will be executed immediately.
+  	//
+  	// .ready( callback )
+  	// ------------------
+  	// @param callback  A function to execute after easyXDM.Rpc is ready.
   	self.ready = function(callback) {
   	  if (_.isFunction(callback)) {
   	    if (isReady) {
+  	      // easyXDM.Rpc is ready, execute the handler immediately.
   	      callback.apply(self);
   	    } else {
   	      readyCallbacks.push(callback);
@@ -153,8 +168,52 @@
   	  return self;
   	};
   	
+  	// Destroys the easyXDM.Rpc object.
+  	//
+  	// .destroy()
+  	self.destroy = function () {
+  	  rpc.destroy();
+  	};
+  	
+  	// Sends a message.
+  	//
+  	// .send( methodName [, arguments] )
+  	// -------------------------------
+  	// @param methodName  The name of the method to call.
+  	// @param arguments   Optional arguments to send with the message.
+  	//
+  	// Example
+  	// -------
+  	// Innertube().send('date', 2012, 0, 1);
   	self.send = function (methodName) {
-  	  message.apply(self, arguments);
+  	  if (_.isString(methodName)) {
+  	    message.apply(self, arguments);
+  	  }
+  	  return self;
+  	};
+  	
+  	// Attach a handler to a received message.
+  	//
+  	// .receive( methodName, callback )
+  	// --------------------------------
+  	// @param methodName  The name of the method to which to attach a handler.
+  	// @param callback    A function to execute each time a message is received.
+  	//
+  	// Example
+  	// -------
+  	// Innertube().receive('date', function (year, month, day) {
+  	//   alert(year + '-' + month + '-' + day);
+  	// });
+  	self.receive = function (methodName, callback) {
+  	  if (!_.isFunction(callback))
+  	    return self;
+  	  
+  	  if (_.has(receiveCallbacks, methodName)) {
+  	    receiveCallbacks[methodName].push(callback);
+  	  } else {
+  	    receiveCallbacks[methodName] = [callback];
+  	  }
+  	  
   	  return self;
   	};
   	
@@ -169,24 +228,6 @@
   	  });
   	  message.apply(self, args);
   	  return self;
-  	};
-  	
-  	self.receive = function (methodName, callback) {
-  	  if (!_.isFunction(callback))
-  	    return self;
-  	  
-  	  if (_.has(receiveCallbacks, methodName)) {
-  	    receiveCallbacks[methodName].push(callback);
-  	  } else {
-  	    receiveCallbacks[methodName] = [callback];
-  	  }
-  	  
-  	  return self;
-  	};
-  	
-  	// Destroys the easyXDM RPC.
-  	self.destroy = function () {
-  	  rpc.destroy();
   	};
 	};
 	
