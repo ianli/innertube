@@ -26,7 +26,6 @@
 	// It has the following attributes:
 	//
 	// * `data` - The data to visualize in the timeline.
-	// * `range` - The range of data to show: `year`, `month`, `week`, or `day`.
 	var TimelineModel = Backbone.Model.extend({
 		
 		// Default attributes for the timeline.
@@ -91,7 +90,6 @@
 			var self = this,
 				$el = $(self.el),
 				data = self.model.get('data'),
-				range = self.model.get('range'),
 				highlightObject = self.model.get('highlight'),
 				columns_count = data.length,
 				columns_width = (columns_count > 0) ? (100 / data.length) : 100;
@@ -101,8 +99,7 @@
 			var $columns = self.$('._column')
 				.each(function (i) {
 					$(this).data({
-						value: i,
-						range: range
+						value: i
 					});
 				})
 				.click(function () {
@@ -138,8 +135,7 @@
 		    return;
 		  }
 		  
-			var self = this,
-				  range = self.model.get('range');
+			var self = this;
 				
 			if (!_.isUndefined(object.hour) && !_.isNull(object.hour)) {
 			  self.$('._column')
@@ -173,19 +169,9 @@
 		// Cache the data.
 		var cache = {};
 		
-		// Returns data for the given range and date information.
-		var get = function (range, year, month, day) {
-			switch (range) {
-				case 'year':
-					return getYear(year);
-				case 'month':
-					return getMonth(year, month);
-				case 'week':
-					return getWeek(year, month, day);
-				case 'day':
-				default:
-					return getDay(year, month, day);
-			}
+		// Returns data for the given date information.
+		var get = function (year, month, day) {
+			return getDay(year, month, day);
 		};
 		
 		// Returns data for a given day.
@@ -309,11 +295,10 @@
         .request("date")
         .request("highlight");
     })
-    .receive('date', function (range, year, month, day) {
-      var data = FakeData.get(range, year, month, day);
+    .receive('date', function (year, month, day) {
+      var data = FakeData.get(year, month, day);
       model.set({ 
-        data: data,
-        range: range
+        data: data
       });
     })
     .receive('highlight', function (highlightObject) {
