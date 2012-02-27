@@ -362,15 +362,15 @@
   		// easyXDM.Rpc Interface Configuration
   		{
   		  local: {
+  		    dashboard: function (method, args, successFn, errorFn) {
+  		      handle.apply(self, [method].concat(args));
+  		    },
+  		    
   		    widget: function (method, args, successFn, errorFn) {
   		      handle.apply(self, [method].concat(args));
   		    },
   		    
   		    message: function (method, args, successFn, errorFn) {
-  		      handle.apply(self, [method].concat(args));
-  		    },
-  		    
-  		    dashboard: function (method, args, successFn, errorFn) {
   		      handle.apply(self, [method].concat(args));
   		    }
   		  },
