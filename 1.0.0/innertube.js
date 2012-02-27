@@ -47,7 +47,6 @@
       container: null
     });
     
-    
     // ===========
   	// EASYXDM RPC
   	// ===========
@@ -194,10 +193,14 @@
 	
 	var innertubeInstance;
   window.Innertube = function (options) {
-    if (typeof innertubeInstance === 'undefined') {
-      innertubeInstance = new Messaging(options);
+    if (typeof options === 'undefined') {
+      if (typeof innertubeInstance === 'undefined') {
+        innertubeInstance = new Messaging();
+      }
+      return innertubeInstance;
+    } else {
+      return new Messaging(options);
     }
-    return innertubeInstance;
   };
   
 }(window, _, easyXDM));
