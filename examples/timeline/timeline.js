@@ -309,11 +309,11 @@
         .request("date")
         .request("highlight");
     })
-    .receive('date', function (value) {
-      var data = FakeData.get(value.range, value.year, value.month, value.day);
+    .receive('date', function (range, year, month, day) {
+      var data = FakeData.get(range, year, month, day);
       model.set({ 
         data: data,
-        range: value.range
+        range: range
       });
     })
     .receive('highlight', function (highlightObject) {
