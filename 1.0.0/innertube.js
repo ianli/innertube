@@ -184,6 +184,11 @@
   	  
   	  return self;
   	};
+  	
+  	// Destroys the easyXDM RPC.
+  	self.destroy = function () {
+  	  rpc.destroy();
+  	};
 	};
 	
 	
