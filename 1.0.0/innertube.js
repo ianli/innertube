@@ -31,7 +31,10 @@
       , methodMissingCallbacks = []
     
       // A hash of functions when a message is received.
-      , receiveCallbacks = {};
+      , receiveCallbacks = {}
+      
+      // Version of this library
+      , VERSION = '1.0.0';
     
     
     // ===============
@@ -50,7 +53,8 @@
     // Set the defaults for options.
     _.defaults(options, {
       remote: null,
-      container: null
+      container: null,
+      hash: {}
     });
     
     
@@ -62,8 +66,10 @@
   	// between the widget and the dashboard.
   	var rpc = new easyXDM.Rpc(
   	  {
+  	    // The path to the widget.
   	    remote: options.remote,
   	    
+  	    // An id or element to put iFrame to be visible for interaction.
   	    container: options.container,
   	    
   			// This function is called when the RPC is ready.
@@ -149,6 +155,7 @@
   	// PUBLIC METHODS
   	// ==============
   	
+  	
   	// Bind an event handler to the event when the easyXDM.Rpc is ready.
   	// If .ready() is called after easyXDM.Rpc is ready,
   	// the new handler passed in will be executed immediately.
@@ -168,12 +175,14 @@
   	  return self;
   	};
   	
+  	
   	// Destroys the easyXDM.Rpc object.
   	//
   	// .destroy()
   	self.destroy = function () {
   	  rpc.destroy();
   	};
+  	
   	
   	// Sends a message.
   	//
@@ -191,6 +200,7 @@
   	  }
   	  return self;
   	};
+  	
   	
   	// Attach a handler to a received message.
   	//
@@ -228,6 +238,17 @@
   	  });
   	  message.apply(self, args);
   	  return self;
+  	};
+  	
+  	
+  	self.data = function (key, value) {
+  	  if (typeof value === 'undefined') {
+  	    self.request(key);
+  	  } else if (_.isFunction(value)) {
+  	    self.receive(key, value);
+  	  } else {
+  	    self.send(key, value);
+  	  }
   	};
 	};
 	
