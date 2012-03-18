@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>D3.js Bar Chart Example - Innertube Widgets API</title>
+	
+	<!-- Blueprint -->
+	<link rel="stylesheet" href="/innertube/assets/stylesheets/blueprint/reset.css" type="text/css" />
+	<link rel="stylesheet" href="/innertube/assets/stylesheets/blueprint/typography.css" type="text/css" />
+
+  <style>
+    body {
+      padding:5px;
+    }
+    .chart {
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -o-user-select: none;
+      user-select: none;
+    }
+    .chart table {
+      margin:0;
+    }
+    .chart table > tr > td._yaxis {
+		  padding:3px 0 0;
+		  width:4%;
+		  vertical-align:top;
+		  text-align:right;
+		  font-size:11px;
+		  color:#666;
+		}
+		  .chart table > tr > td._yaxis > ._labels {
+		    position:relative;
+		    border-right:1px solid #999;
+		  }
+		  .chart table > tr > td._yaxis > ._labels > ._max,
+		  .chart table > tr > td._yaxis > ._labels > ._min,
+		  .chart table > tr > td._yaxis > ._labels > ._legend {
+		    position:absolute;
+		    right:0;
+		    padding-right:5px;
+		  }
+		  .chart table > tr > td._yaxis > ._labels > ._max {
+		    top:0;
+		  }
+		  .chart table > tr > td._yaxis > ._labels > ._min {
+		    bottom:0;
+		  }
+		  .chart table > tr > td._yaxis > ._labels > ._legend {
+		    top:50%;
+		    -webkit-transform: rotate(-90deg); 
+        -moz-transform: rotate(-90deg);
+        filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+		  }
+    .chart table > tr > td._column {
+      padding:3px 0 0;
+      width:4%;
+      text-align:center;
+      cursor:pointer;
+    }
+      .chart table > tr > td._column.selected {
+        background-color:#eee;
+      }
+      .chart table > tr > td._column:hover {
+        background-color:#e3e3e3;
+      }
+      .chart table > tr > td._column > ._value {
+        position:relative;
+        border-bottom:1px solid #999;
+  		  text-align:center;
+      }
+      .chart table > tr > td._column > ._value > ._bar {
+        position:absolute;
+  			left:50%;
+  		  bottom:0;
+  		  margin-left:-45%;
+  			width:90%;
+        background-color:#44a9eb;
+        font-size:11px;
+        text-align: center;
+        color: white;
+      }
+      .chart table > tr > td._column > ._xaxis {
+        padding:5px 0;
+  			height:12px;
+  			line-height:12px;
+  			font-size:11px;
+  			color:#666;
+      }
+  </style>
+</head>
+<body>
+
+<!-- Javascripts -->
+<script src="http://ianli.github.com/innertube/javascripts/easyXDM-2.4.15.118/easyXDM.js"></script>
+<script>
+	easyXDM.DomHelper.requiresJSON("http://ianli.github.com/innertube/javascripts/easyXDM-2.4.15.118/json2.js");
+</script>
+<script src="http://ianli.github.com/innertube/javascripts/underscore-1.3.1.js"></script>
+<script src="http://ianli.github.com/innertube/1.0.0/innertube.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<script src="../../javascripts/d3.v2.js"></script>
+
+<script>
+(function (easyXDM, _, Innertube, d3, $, undefined) {
+  
+  var render = function () {
+    d3.select('div.chart').remove();
+    
+    var data = [];
+    for (var i = 0; i < 24; i++) {
+			data.push(Math.random() * 10);
+		}
+    
+    var maxValue = d3.max(data, function (d) { return d; })
+      , minValue = d3.min(data, function (d) { return d; })
+      , valueHeight = 160
+      , barPadding = 20
+      , legend = 'unit'
+      , maxBarHeight = valueHeight - barPadding
+      , fy = function (d) { return (d / maxValue) * maxBarHeight + barPadding; }
+      , format    = d3.format('.2r')
+      , chart     = d3.select('body').append('div')
+                    .attr('class', 'chart')
+      , table     = chart.append('table')
+      , row       = table.append('tr')
+      , yaxisCol  = row.append('td')
+                          .classed('_yaxis', true)
+                        .append('div')
+                          .classed('_labels', true)
+                          .style('height', valueHeight + 'px')
+      , yaxisMax  = yaxisCol.append('div')
+                          .classed('_max', true)
+                        .text(format(maxValue))
+      , yaxisMin  = yaxisCol.append('div')
+                          .classed('_min', true)
+                        .text(format(minValue))
+      , yLegend   = yaxisCol.append('div')
+                          .classed('_legend', true)
+                        .text(legend)
+      , columns   = row.selectAll('td')
+                        .data(data)
+                      .enter().append('td')
+                        .classed('_column', true)
+                        .on('click', function (d, index) {
+                          columns.classed('selected', false);
+                          d3.select(this)
+                            .classed('selected', true);
+                        })
+      , values    = columns.append('div')
+                      .classed('_value', true)
+                      .style('height', valueHeight + 'px')
+      , bars      = values.append('div')
+                      .classed('_bar', true)
+                      .style('height', function (d) { return fy(d) + "px"; })
+                      .text(function (d) { return format(d); })
+      , axis      = columns.append('div')
+                      .classed('_xaxis', true)
+                      .text(function (d, index) {
+                        var h = index % 12,
+                            ampm = (index < 12) ? 'a' : 'p';
+
+                        if (h == 0) { h = 12; }
+
+                        return h + ampm;
+                      });
+  }
+  
+  Innertube()
+    .ready(function () {
+      render();
+      Innertube().send('height', $('body').outerHeight());
+    })
+    .receive('date', function (year, month, day) {
+      render();
+    });
+      
+} (easyXDM, _, Innertube, d3, jQuery));
+</script>
+
+</body>
+</html>
