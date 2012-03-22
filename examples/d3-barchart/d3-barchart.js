@@ -1,5 +1,32 @@
-(function (window, _, Innertube, d3, $, undefined) {
+//     Innertube - D3.js Bar Chart Example
+//     Copyright 2012, Ian Li (http://ianli.com)
+//     This example may be freely distributed under the MIT license.
+
+// A simple example of an Innertube widget using the D3.js Javascript library.
+//
+// Dependencies:
+//
+// * [Innertube Widgets API](http://ianli.github.com/innertube/)
+// * [easyXDM](http://easyXDM.net) for cross-domain messaging
+// * [jQuery](http://jquery.com) for DOM manipulation
+// * [Underscore.js](http://documentcloud.github.com/underscore/) for utility functions
+// * [Backbone.js](http://documentcloud.github.com/backbone/) for MVC pattern
+
+// * The semicolon prevents potential errors when minifying code together.
+// * The function sandboxes the code.
+// * Pass local reference to window and jQuery for performance reasons.
+// * Redefines undefined as it could have been tampered with.
+(function (window, _, Innertube, d3, Backbone, $, undefined) {
   
+  // D3BarChartModel
+	// ---------------
+	
+	// Model for the D3.js Bar Chart.
+	// It has the following attributes:
+	//
+	// * `date` - The date of the data to visualize.
+	// * `data` - The data to visualize in the timeline.
+	// * `highlight` - An object representing what to highlight.
   window.D3BarChartModel = Backbone.Model.extend({
     // Default attributes for the timeline.
   	defaults: {
@@ -138,4 +165,4 @@
 
   });
   
-} (window, _, Innertube, d3, jQuery));
+} (window, _, Innertube, d3, Backbone, jQuery));
