@@ -1,0 +1,80 @@
+body {
+  padding:5px;
+}
+.chart {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+.chart table {
+  margin:0;
+}
+.chart table > tr > td._yaxis {
+  padding:3px 0 0;
+  width:4%;
+  vertical-align:top;
+  text-align:right;
+  font-size:11px;
+  color:#666;
+}
+  .chart table > tr > td._yaxis > ._labels {
+    position:relative;
+    border-right:1px solid #999;
+  }
+  .chart table > tr > td._yaxis > ._labels > ._max,
+  .chart table > tr > td._yaxis > ._labels > ._min,
+  .chart table > tr > td._yaxis > ._labels > ._legend {
+    position:absolute;
+    right:0;
+    padding-right:5px;
+  }
+  .chart table > tr > td._yaxis > ._labels > ._max {
+    top:0;
+  }
+  .chart table > tr > td._yaxis > ._labels > ._min {
+    bottom:0;
+  }
+  .chart table > tr > td._yaxis > ._labels > ._legend {
+    top:50%;
+    -webkit-transform: rotate(-90deg); 
+    -moz-transform: rotate(-90deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  }
+.chart table > tr > td._column {
+  padding:3px 0 0;
+  width:4%;
+  text-align:center;
+  cursor:pointer;
+}
+  .chart table > tr > td._column.selected {
+    background-color:#eee;
+  }
+  .chart table > tr > td._column:hover {
+    background-color:#e3e3e3;
+  }
+  .chart table > tr > td._column > ._value {
+    position:relative;
+    border-bottom:1px solid #999;
+	  text-align:center;
+  }
+  .chart table > tr > td._column > ._value > ._bar {
+    position:absolute;
+		left:50%;
+	  bottom:0;
+	  margin-left:-45%;
+		width:90%;
+    background-color:#44a9eb;
+    font-size:11px;
+    text-align: center;
+    color: white;
+  }
+  .chart table > tr > td._column > ._xaxis {
+    padding:5px 0;
+		height:12px;
+		line-height:12px;
+		font-size:11px;
+		color:#666;
+  }
